@@ -1,0 +1,557 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\usepackage{amsmath,amssymb,enumitem,booktabs}
+\setlist{itemsep=2pt,topsep=3pt}
+\usepackage{fancyhdr}\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small DS701 Fall 2026}\fancyhead[R]{\small Homework 2}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\usepackage[breakable]{tcolorbox}
+% --- answer-space macros (problems PDF only; no-ops in the solutions PDF) ---
+% \answerspace{2in}  vertical room for handwritten work, sized from the solution
+% \blank             a short fill-in rule; \blank[1.5in] for a wider one
+% \answerpage        start the next problem on a fresh page (Gradescope page matching)
+\newcommand{\answerspace}[1]{\par\vspace*{#1}}  % \vspace* so room is not dropped at a page break
+\newcommand{\blank}[1][1.2in]{\rule{#1}{0.4pt}}
+\newcommand{\answerpage}{\clearpage}
+\newtcolorbox{solutionbox}{breakable,colback=blue!4,colframe=blue!45!black,title=Solution,fonttitle=\bfseries,left=4pt,right=4pt,top=3pt,bottom=3pt}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={DS701 Homework 2: Distances},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{DS701 Homework 2: Distances}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Released Mon Sep 14 · due Mon Sep 21, 11:59 pm on Gradescope}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+
+\noindent\textbf{Name:}\ \rule{2.0in}{0.4pt}\qquad\textbf{BU ID:}\ \rule{1.2in}{0.4pt}
+\vspace{6pt}
+
+\textbf{How this works.} Answer \textbf{by hand on paper} (or a tablet
+with a stylus), show your work, then scan and upload to Gradescope,
+matching each problem to its pages. This is deliberate practice for the
+closed-notes quizzes, which are in the same style --- so do it without a
+computer or an AI assistant. It is \textbf{participation-graded}: a
+serious attempt at every problem earns full credit, and worked solutions
+are released the day after the deadline. Budget 1--2 hours.
+
+\textbf{Covers:} Lecture 02 (Distances and Similarity --- metrics,
+\(\ell_p\) distances, cosine, Hamming/Jaccard, feature scaling). Time
+series and DTW are \emph{not} covered. Square roots may be left as
+\(\sqrt{\cdot}\) with a one-decimal approximation next to them
+(e.g.~\(\sqrt{12}\approx 3.5\)).
+
+\subsection{Problem 1: The metric decides who is
+close}\label{problem-1-the-metric-decides-who-is-close}
+
+\emph{Practices: Minkowski distances, cosine similarity, Hamming and
+Jaccard --- and noticing that ``closest'' depends on the choice.}
+
+Three short documents are represented as word-count vectors over the
+vocabulary (\emph{data}, \emph{model}, \emph{error}):
+\[\mathbf{A} = (1, 1, 1),\qquad \mathbf{B} = (3, 3, 3),\qquad \mathbf{C} = (6, 1, 1).\]
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  For each of the three pairs (A,B), (A,C), (B,C) compute the Minkowski
+  distance \(\Vert\mathbf{x}-\mathbf{y}\Vert_p\) for \(p = 1\)
+  (Manhattan), \(p = 2\) (Euclidean) and \(p = \infty\) (Chebyshev) ---
+  nine numbers, arranged as a \(3\times3\) table. Under each of the
+  three distances, which pair is \textbf{closest}? Note where the answer
+  changes.
+\end{enumerate}
+
+\begin{longtable}[]{@{}cccc@{}}
+\toprule\noalign{}
+pair & \(p=1\) & \(p=2\) & \(p=\infty\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+(A,B) & \blank[0.8in] & \blank[0.8in] & \blank[0.8in] \\
+(A,C) & \blank[0.8in] & \blank[0.8in] & \blank[0.8in] \\
+(B,C) & \blank[0.8in] & \blank[0.8in] & \blank[0.8in] \\
+\end{longtable}
+
+Closest pair: \(p=1\): \blank[0.7in] \(\quad p=2\):
+\blank[0.7in] \(\quad p=\infty\): \blank[0.7in]
+
+\answerspace{2.2in}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Compute the cosine similarity for the same three pairs (three
+  decimals; \(\sqrt{3}\approx1.732\), \(\sqrt{27}\approx5.196\),
+  \(\sqrt{38}\approx6.164\), \(\sqrt{114}\approx10.677\)). Which pair is
+  most similar under cosine? Explain in one sentence why cosine gives A
+  and B the value it does even though every \(\ell_p\) distance in (a)
+  says they are some way apart, and say which of the two views is the
+  right one if we want to know whether two documents are \emph{about the
+  same thing}.
+\end{enumerate}
+
+\(\cos(\mathbf{A},\mathbf{B}) =\)
+\blank[0.8in] \(\qquad \cos(\mathbf{A},\mathbf{C}) =\)
+\blank[0.8in] \(\qquad \cos(\mathbf{B},\mathbf{C}) =\) \blank[0.8in]
+
+Most similar pair: \blank[0.8in]
+
+\answerspace{2.4in}
+
+\newpage % (c) with its table and answer room starts on a fresh page rather than splitting
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Two pairs of shopping baskets, as sets of items:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \(P = \{\)bread, milk, eggs, butter, cheese, apples, rice,
+  coffee\(\}\) and \(Q = \{\)bread, milk, eggs, butter, cheese, apples,
+  rice, tea\(\}\);
+\item
+  \(R = \{\)bread, milk\(\}\) and \(S = \{\)bread, jam\(\}\).
+\end{itemize}
+
+For each pair compute the Hamming distance (the number of items in one
+basket but not the other, i.e.~the size of the symmetric difference) and
+the Jaccard similarity \(J_{\rm Sim} = |x\cap y|/|x\cup y|\). Which pair
+does Hamming say is more alike, and which does Jaccard say? In one or
+two sentences, say which measure you would trust for ``are these two
+shoppers similar?'' and why.
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule\noalign{}
+pair & Hamming & \(J_{\rm Sim}\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+(P,Q) & \blank[0.8in] & \blank[0.8in] \\
+(R,S) & \blank[0.8in] & \blank[0.8in] \\
+\end{longtable}
+
+\answerspace{1.8in}
+
+\answerpage
+
+\subsection{Problem 2: Is it a metric?}\label{problem-2-is-it-a-metric}
+
+\emph{Practices: the metric axioms, especially the triangle inequality,
+and why they matter downstream.}
+
+Recall the four metric axioms: \(d(x,x)=0\); \(d(x,y)>0\) for
+\(x\ne y\); \(d(x,y)=d(y,x)\); and the triangle inequality
+\(d(x,y)\le d(x,z)+d(z,y)\) for all \(x,y,z\).
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Let \(P=(0,0)\), \(Q=(3,4)\), \(R=(6,0)\) in \(\mathbb{R}^2\). Compute
+  the three Euclidean distances \(d(P,Q)\), \(d(Q,R)\), \(d(P,R)\) and
+  verify the triangle inequality for this triple in all three ways (each
+  distance is at most the sum of the other two). Then state, in one
+  line, when the triangle inequality holds with \textbf{equality} for
+  Euclidean distance, and give a triple of points that achieves it.
+\end{enumerate}
+
+\(d(P,Q) =\) \blank[0.7in] \(\quad d(Q,R) =\)
+\blank[0.7in] \(\quad d(P,R) =\) \blank[0.7in]
+
+\answerspace{1.9in}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Cosine \emph{distance} is
+  \(d_{\cos}(\mathbf{x},\mathbf{y}) = 1 - \cos(\mathbf{x},\mathbf{y})\).
+  The lecture says it is \textbf{not} a metric. Prove it: give three
+  explicit vectors \(\mathbf{x},\mathbf{z},\mathbf{y}\) in
+  \(\mathbb{R}^2\) for which
+  \(d_{\cos}(\mathbf{x},\mathbf{y}) > d_{\cos}(\mathbf{x},\mathbf{z}) + d_{\cos}(\mathbf{z},\mathbf{y})\),
+  and show the numbers (use \(\cos 45^\circ = 1/\sqrt2 \approx 0.707\)
+  if it helps). \emph{Hint:} think about angles \(0^\circ\),
+  \(45^\circ\), \(90^\circ\).
+\end{enumerate}
+
+\(\mathbf{x} =\) \blank[0.9in] \(\quad \mathbf{z} =\)
+\blank[0.9in] \(\quad \mathbf{y} =\) \blank[0.9in]
+
+\answerspace{2.3in}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Cosine distance fails a \textbf{second} axiom as well. Which one, and
+  what is a two-vector example? (One line.)
+\end{enumerate}
+
+\answerspace{1in}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  In two or three sentences: why does it matter, for nearest-neighbor
+  search or for clustering, whether the dissimilarity you use satisfies
+  the triangle inequality? Concretely, what can you conclude about
+  \(d(q,b)\) from knowing \(d(q,a)\) is small and \(d(a,b)\) is large
+  when \(d\) is a metric --- and what goes wrong when it is not?
+\end{enumerate}
+
+\answerspace{1.8in}
+
+\answerpage
+
+\subsection{Problem 3: Same points, different units, different
+neighbor}\label{problem-3-same-points-different-units-different-neighbor}
+
+\emph{Practices: why raw Euclidean distance is dominated by the
+largest-range feature, and what standardizing does.}
+
+A bank describes customers by two features: annual income (in dollars)
+and age (in years). A query customer \(q\) and four customers on file:
+
+\begin{longtable}[]{@{}crr@{}}
+\toprule\noalign{}
+& income & age \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(q\) & 50,000 & 30 \\
+\(P_1\) & 52,000 & 60 \\
+\(P_2\) & 60,000 & 32 \\
+\(P_3\) & 45,000 & 28 \\
+\(P_4\) & 51,000 & 45 \\
+\end{longtable}
+
+To \textbf{standardize} a feature, replace each value \(v\) by its
+\(z\)-score \((v-\mu)/\sigma\), where \(\mu\) and \(\sigma\) are the
+feature's mean and standard deviation. Use these values, taken from the
+bank's full customer base: income \(\mu = 50{,}000\),
+\(\sigma = 10{,}000\); age \(\mu = 40\), \(\sigma = 10\).
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Using raw Euclidean distance, which of \(P_1,\dots,P_4\) is the
+  nearest neighbor of \(q\)? (Squared distances are enough to rank;
+  report them.) In one line: how much does the age difference contribute
+  to any of these distances?
+\end{enumerate}
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(P_1\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(P_2\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(P_3\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(P_4\)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(d^2\) from \(q\) & \blank[0.9in] & \blank[0.9in] & \blank[0.9in] &
+\blank[0.9in] \\
+\end{longtable}
+
+Nearest neighbor: \blank[0.7in]
+
+\answerspace{1.4in}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Standardize all five rows with the given \(\mu,\sigma\) (write the
+  \(z\)-scores), recompute the four squared Euclidean distances from
+  \(q\), and give the nearest neighbor now. Does it change?
+\end{enumerate}
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}
+  >{\centering\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1667}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(q\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(P_1\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(P_2\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(P_3\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(P_4\)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(z_{\text{income}}\) & \blank[0.7in] & \blank[0.7in] & \blank[0.7in] &
+\blank[0.7in] & \blank[0.7in] \\
+\(z_{\text{age}}\) & \blank[0.7in] & \blank[0.7in] & \blank[0.7in] &
+\blank[0.7in] & \blank[0.7in] \\
+\(d^2\) from \(q\) & --- & \blank[0.7in] & \blank[0.7in] & \blank[0.7in]
+& \blank[0.7in] \\
+\end{longtable}
+
+Nearest neighbor: \blank[0.7in]
+
+\answerspace{2in}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Redo (a) with income measured in \emph{thousands} of dollars (50, 52,
+  60, 45, 51) and age unchanged. Which neighbor wins? Then answer: which
+  of the three answers should a data scientist trust as ``the customer
+  most like \(q\)'', and why --- what is wrong with the other two?
+\end{enumerate}
+
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(P_1\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(P_2\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(P_3\)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+\(P_4\)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(d^2\) from \(q\) & \blank[0.9in] & \blank[0.9in] & \blank[0.9in] &
+\blank[0.9in] \\
+\end{longtable}
+
+Nearest neighbor: \blank[0.7in] \(\quad\) Trust: (a) / (b) / (c)
+
+\answerspace{2in}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Standardizing is not always right. Give one situation where you would
+  \textbf{not} standardize before computing distances, and one sentence
+  on why (think about features that are already in the same meaningful
+  units, or a feature whose spread \emph{should} count).
+\end{enumerate}
+
+\answerspace{1.8in}
+
+
+
+
+\end{document}
