@@ -1,0 +1,561 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\usepackage{amsmath,amssymb,enumitem,booktabs}
+\setlist{itemsep=2pt,topsep=3pt}
+\usepackage{fancyhdr}\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small DS701 Fall 2026}\fancyhead[R]{\small Homework 2}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\usepackage[breakable]{tcolorbox}
+% --- answer-space macros (problems PDF only; no-ops in the solutions PDF) ---
+% \answerspace{2in}  vertical room for handwritten work, sized from the solution
+% \blank             a short fill-in rule; \blank[1.5in] for a wider one
+% \answerpage        start the next problem on a fresh page (Gradescope page matching)
+\newcommand{\answerspace}[1]{\par\vspace*{#1}}  % \vspace* so room is not dropped at a page break
+\newcommand{\blank}[1][1.2in]{\rule{#1}{0.4pt}}
+\newcommand{\answerpage}{\clearpage}
+\newtcolorbox{solutionbox}{breakable,colback=blue!4,colframe=blue!45!black,title=Solution,fonttitle=\bfseries,left=4pt,right=4pt,top=3pt,bottom=3pt}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={DS701 Homework 2: Distances},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{DS701 Homework 2: Distances}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Released Mon Sep 14 · due Mon Sep 21, 11:59 pm on Gradescope}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+
+\begin{center}\LARGE\bfseries\color{blue!45!black} SOLUTIONS\end{center}
+\renewcommand{\answerspace}[1]{}
+\renewcommand{\answerpage}{\par\vspace{6pt}}
+
+\subsection{Problem 1: The metric decides who is
+close}\label{problem-1-the-metric-decides-who-is-close}
+
+\emph{Practices: Minkowski distances, cosine similarity, Hamming and
+Jaccard --- and noticing that ``closest'' depends on the choice.}
+
+Three short documents are represented as word-count vectors over the
+vocabulary (\emph{data}, \emph{model}, \emph{error}):
+\[\mathbf{A} = (1, 1, 1),\qquad \mathbf{B} = (3, 3, 3),\qquad \mathbf{C} = (6, 1, 1).\]
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  For each of the three pairs (A,B), (A,C), (B,C) compute the Minkowski
+  distance \(\Vert\mathbf{x}-\mathbf{y}\Vert_p\) for \(p = 1\)
+  (Manhattan), \(p = 2\) (Euclidean) and \(p = \infty\) (Chebyshev) ---
+  nine numbers, arranged as a \(3\times3\) table. Under each of the
+  three distances, which pair is \textbf{closest}? Note where the answer
+  changes.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Compute the cosine similarity for the same three pairs (three
+  decimals; \(\sqrt{3}\approx1.732\), \(\sqrt{27}\approx5.196\),
+  \(\sqrt{38}\approx6.164\), \(\sqrt{114}\approx10.677\)). Which pair is
+  most similar under cosine? Explain in one sentence why cosine gives A
+  and B the value it does even though every \(\ell_p\) distance in (a)
+  says they are some way apart, and say which of the two views is the
+  right one if we want to know whether two documents are \emph{about the
+  same thing}.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Two pairs of shopping baskets, as sets of items:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \(P = \{\)bread, milk, eggs, butter, cheese, apples, rice,
+  coffee\(\}\) and \(Q = \{\)bread, milk, eggs, butter, cheese, apples,
+  rice, tea\(\}\);
+\item
+  \(R = \{\)bread, milk\(\}\) and \(S = \{\)bread, jam\(\}\).
+\end{itemize}
+
+For each pair compute the Hamming distance (the number of items in one
+basket but not the other, i.e.~the size of the symmetric difference) and
+the Jaccard similarity \(J_{\rm Sim} = |x\cap y|/|x\cup y|\). Which pair
+does Hamming say is more alike, and which does Jaccard say? In one or
+two sentences, say which measure you would trust for ``are these two
+shoppers similar?'' and why.
+
+\begin{solutionbox}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Difference vectors: \(\mathbf{A}-\mathbf{B} = (-2,-2,-2)\),
+  \(\mathbf{A}-\mathbf{C} = (-5,0,0)\),
+  \(\mathbf{B}-\mathbf{C} = (-3,2,2)\).
+\end{enumerate}
+
+\begin{longtable}[]{@{}cccc@{}}
+\toprule\noalign{}
+pair & \(p=1\) & \(p=2\) & \(p=\infty\) \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+(A,B) & \(6\) & \(\sqrt{12}\approx3.46\) & \(2\) \\
+(A,C) & \(5\) & \(\sqrt{25}=5\) & \(5\) \\
+(B,C) & \(7\) & \(\sqrt{17}\approx4.12\) & \(3\) \\
+\end{longtable}
+
+Closest pair: \textbf{(A,C)} under Manhattan (5 \textless{} 6
+\textless{} 7), but \textbf{(A,B)} under Euclidean (\(3.46\)) and under
+Chebyshev (\(2\)). The ranking changes with \(p\): Manhattan adds up
+three moderate differences for (A,B) and penalizes them more than the
+single large difference of (A,C); Chebyshev sees only that single
+largest difference.
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\item
+  \(\cos(\mathbf{A},\mathbf{B}) = \dfrac{3+3+3}{\sqrt3\,\sqrt{27}} = \dfrac{9}{\sqrt{81}} = 1.000\);
+  \(\cos(\mathbf{A},\mathbf{C}) = \dfrac{6+1+1}{\sqrt3\,\sqrt{38}} = \dfrac{8}{\sqrt{114}} \approx \dfrac{8}{10.677} \approx 0.749\);
+  \(\cos(\mathbf{B},\mathbf{C}) = \dfrac{18+3+3}{\sqrt{27}\,\sqrt{38}} = \dfrac{24}{\sqrt{1026}} \approx \dfrac{24}{32.03} \approx 0.749\)
+  (same as (A,C), because \(\mathbf{B} = 3\mathbf{A}\) has the same
+  direction as \(\mathbf{A}\)). Most similar: \textbf{(A,B)}, with
+  cosine exactly 1: \(\mathbf{B} = 3\mathbf{A}\) points in the same
+  direction, and cosine measures direction only --- it is unchanged by
+  rescaling either vector --- while every \(\ell_p\) distance measures
+  the length of the difference vector, which is nonzero. For ``about the
+  same thing'' cosine is the right view: B is A with every word used
+  three times as often (a document three times as long on the same
+  topic), and topic is a matter of word \emph{proportions}, not counts.
+\item
+  \(P\cap Q\) has 7 items, \(P\cup Q\) has 9, symmetric difference
+  \(\{\)coffee, tea\(\}\): Hamming \(=2\),
+  \(J_{\rm Sim} = 7/9 \approx 0.778\). \(R\cap S = \{\)bread\(\}\),
+  \(R\cup S = \{\)bread, milk, jam\(\}\), symmetric difference
+  \(\{\)milk, jam\(\}\): Hamming \(=2\),
+  \(J_{\rm Sim} = 1/3 \approx 0.333\). Hamming calls the two pairs
+  \emph{equally} alike (2 and 2); Jaccard says (P,Q) is far more alike
+  (\(0.78\) vs \(0.33\)). Trust Jaccard: P and Q agree on 7 of 9 items
+  and differ on one swap, whereas R and S agree on 1 of 3 --- Jaccard
+  normalizes the disagreement by how much there was to agree on, Hamming
+  counts raw disagreements regardless of basket size.
+\end{enumerate}
+
+\emph{Common mistake:} in (a), forgetting the square root for \(p=2\)
+(reporting 12, 25, 17), or taking \(\max\) of the raw coordinates rather
+than of the absolute differences for \(p=\infty\).
+
+\end{solutionbox}
+
+\answerpage
+
+\subsection{Problem 2: Is it a metric?}\label{problem-2-is-it-a-metric}
+
+\emph{Practices: the metric axioms, especially the triangle inequality,
+and why they matter downstream.}
+
+Recall the four metric axioms: \(d(x,x)=0\); \(d(x,y)>0\) for
+\(x\ne y\); \(d(x,y)=d(y,x)\); and the triangle inequality
+\(d(x,y)\le d(x,z)+d(z,y)\) for all \(x,y,z\).
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Let \(P=(0,0)\), \(Q=(3,4)\), \(R=(6,0)\) in \(\mathbb{R}^2\). Compute
+  the three Euclidean distances \(d(P,Q)\), \(d(Q,R)\), \(d(P,R)\) and
+  verify the triangle inequality for this triple in all three ways (each
+  distance is at most the sum of the other two). Then state, in one
+  line, when the triangle inequality holds with \textbf{equality} for
+  Euclidean distance, and give a triple of points that achieves it.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Cosine \emph{distance} is
+  \(d_{\cos}(\mathbf{x},\mathbf{y}) = 1 - \cos(\mathbf{x},\mathbf{y})\).
+  The lecture says it is \textbf{not} a metric. Prove it: give three
+  explicit vectors \(\mathbf{x},\mathbf{z},\mathbf{y}\) in
+  \(\mathbb{R}^2\) for which
+  \(d_{\cos}(\mathbf{x},\mathbf{y}) > d_{\cos}(\mathbf{x},\mathbf{z}) + d_{\cos}(\mathbf{z},\mathbf{y})\),
+  and show the numbers (use \(\cos 45^\circ = 1/\sqrt2 \approx 0.707\)
+  if it helps). \emph{Hint:} think about angles \(0^\circ\),
+  \(45^\circ\), \(90^\circ\).
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Cosine distance fails a \textbf{second} axiom as well. Which one, and
+  what is a two-vector example? (One line.)
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  In two or three sentences: why does it matter, for nearest-neighbor
+  search or for clustering, whether the dissimilarity you use satisfies
+  the triangle inequality? Concretely, what can you conclude about
+  \(d(q,b)\) from knowing \(d(q,a)\) is small and \(d(a,b)\) is large
+  when \(d\) is a metric --- and what goes wrong when it is not?
+\end{enumerate}
+
+\begin{solutionbox}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\item
+  \(d(P,Q) = \sqrt{9+16} = 5\); \(d(Q,R) = \sqrt{9+16} = 5\);
+  \(d(P,R) = \sqrt{36+0} = 6\). Checks: \(d(P,R) = 6 \le 5+5 = 10\);
+  \(d(P,Q) = 5 \le 6+5 = 11\); \(d(Q,R) = 5 \le 5+6 = 11\). All hold
+  (strictly). Equality holds exactly when the middle point lies
+  \textbf{on the straight segment} between the other two (collinear,
+  \(z\) between \(x\) and \(y\)), e.g.~\(P=(0,0)\), \(Z=(3,4)\),
+  \(Y=(6,8)\): \(d(P,Y) = 10 = 5 + 5\).
+\item
+  Take \(\mathbf{x} = (1,0)\), \(\mathbf{z} = (1,1)\),
+  \(\mathbf{y} = (0,1)\): angles \(0^\circ\), \(45^\circ\),
+  \(90^\circ\). \(d_{\cos}(\mathbf{x},\mathbf{y}) = 1 - 0 = 1\);
+  \(d_{\cos}(\mathbf{x},\mathbf{z}) = 1 - \dfrac{1}{1\cdot\sqrt2} = 1 - 0.707 = 0.293\),
+  and by symmetry \(d_{\cos}(\mathbf{z},\mathbf{y}) = 0.293\). So
+  \(d_{\cos}(\mathbf{x},\mathbf{z}) + d_{\cos}(\mathbf{z},\mathbf{y}) = 0.586 < 1 = d_{\cos}(\mathbf{x},\mathbf{y})\):
+  going through \(\mathbf{z}\) is a ``shortcut'', which a metric
+  forbids. One violating triple is a complete proof. (Remark: the
+  \emph{angle} itself, \(\theta = \arccos(\cos)\), does satisfy the
+  triangle inequality --- here \(90^\circ \le 45^\circ + 45^\circ\); it
+  is \(1-\cos\) that bends the scale.)
+\item
+  Positivity: \(d(x,y)>0\) for \(x\ne y\) fails, since any two vectors
+  in the same direction have \(d_{\cos} = 0\) --- e.g.~\((1,0)\) and
+  \((3,0)\): \(\cos = 3/(1\cdot3) = 1\), so \(d_{\cos} = 0\) although
+  the vectors differ.
+\item
+  With a metric, small \(d(q,a)\) and large \(d(a,b)\) force
+  \(d(q,b) \ge d(a,b) - d(q,a)\) to be large: ``close to something far
+  from \(b\)'' means ``far from \(b\)'', so a search can skip \(b\)
+  without computing \(d(q,b)\), and a cluster of mutually close points
+  cannot contain a point far from all its members. Without the triangle
+  inequality none of that follows --- \(q\) can be close to \(a\), \(a\)
+  close to \(b\), and \(q\) far from \(b\) --- so pruning is unsafe and
+  ``clusters'' of near neighbors need not be internally coherent.
+  (Cosine distance is still used constantly; the point is to know which
+  guarantees you have given up.)
+\end{enumerate}
+
+\emph{Common mistake:} trying to prove (b) with vectors like \((1,0)\)
+and \((2,0)\) --- those have \(d_{\cos}=0\) and show positivity failing
+(part (c)), not the triangle inequality.
+
+\end{solutionbox}
+
+\answerpage
+
+\subsection{Problem 3: Same points, different units, different
+neighbor}\label{problem-3-same-points-different-units-different-neighbor}
+
+\emph{Practices: why raw Euclidean distance is dominated by the
+largest-range feature, and what standardizing does.}
+
+A bank describes customers by two features: annual income (in dollars)
+and age (in years). A query customer \(q\) and four customers on file:
+
+\begin{longtable}[]{@{}crr@{}}
+\toprule\noalign{}
+& income & age \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\(q\) & 50,000 & 30 \\
+\(P_1\) & 52,000 & 60 \\
+\(P_2\) & 60,000 & 32 \\
+\(P_3\) & 45,000 & 28 \\
+\(P_4\) & 51,000 & 45 \\
+\end{longtable}
+
+To \textbf{standardize} a feature, replace each value \(v\) by its
+\(z\)-score \((v-\mu)/\sigma\), where \(\mu\) and \(\sigma\) are the
+feature's mean and standard deviation. Use these values, taken from the
+bank's full customer base: income \(\mu = 50{,}000\),
+\(\sigma = 10{,}000\); age \(\mu = 40\), \(\sigma = 10\).
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Using raw Euclidean distance, which of \(P_1,\dots,P_4\) is the
+  nearest neighbor of \(q\)? (Squared distances are enough to rank;
+  report them.) In one line: how much does the age difference contribute
+  to any of these distances?
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Standardize all five rows with the given \(\mu,\sigma\) (write the
+  \(z\)-scores), recompute the four squared Euclidean distances from
+  \(q\), and give the nearest neighbor now. Does it change?
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Redo (a) with income measured in \emph{thousands} of dollars (50, 52,
+  60, 45, 51) and age unchanged. Which neighbor wins? Then answer: which
+  of the three answers should a data scientist trust as ``the customer
+  most like \(q\)'', and why --- what is wrong with the other two?
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Standardizing is not always right. Give one situation where you would
+  \textbf{not} standardize before computing distances, and one sentence
+  on why (think about features that are already in the same meaningful
+  units, or a feature whose spread \emph{should} count).
+\end{enumerate}
+
+\begin{solutionbox}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\item
+  Squared raw distances from \(q\): \(P_1\):
+  \(2000^2 + 30^2 = 4{,}000{,}000 + 900 = 4{,}000{,}900\); \(P_2\):
+  \(10{,}000^2 + 2^2 = 100{,}000{,}004\); \(P_3\):
+  \(5000^2 + 2^2 = 25{,}000{,}004\); \(P_4\):
+  \(1000^2 + 15^2 = 1{,}000{,}225\). Nearest neighbor: \textbf{\(P_4\)}
+  (\(d\approx1000.1\)). Age contributes at most \(900\) out of millions
+  --- well under \(0.1\%\); the ranking is decided by income alone.
+\item
+  \(z\)-scores
+  \(\big((\text{income}-50{,}000)/10{,}000,\ (\text{age}-40)/10\big)\):
+  \(q = (0,\,-1)\), \(P_1 = (0.2,\,2)\), \(P_2 = (1,\,-0.8)\),
+  \(P_3 = (-0.5,\,-1.2)\), \(P_4 = (0.1,\,0.5)\). Squared distances from
+  \(q\): \(P_1\): \(0.04 + 9 = 9.04\); \(P_2\): \(1 + 0.04 = 1.04\);
+  \(P_3\): \(0.25 + 0.04 = 0.29\); \(P_4\): \(0.01 + 2.25 = 2.26\).
+  Nearest neighbor: \textbf{\(P_3\)} (\(d = \sqrt{0.29}\approx0.54\)).
+  Yes --- it flips: \(P_4\), the raw winner, is now third, because its
+  15-year age gap (1.5 SD) finally counts.
+\item
+  Income in thousands: \(P_1\): \(2^2 + 30^2 = 904\); \(P_2\):
+  \(10^2 + 2^2 = 104\); \(P_3\): \(5^2+2^2 = 29\); \(P_4\):
+  \(1^2 + 15^2 = 226\). Nearest: \textbf{\(P_3\)} --- a \emph{third}
+  computation on the same customers, and now age dominates instead of
+  income. Trust (b). The raw answers in (a) and (c) depend on an
+  arbitrary bookkeeping choice --- dollars vs thousands of dollars ---
+  that says nothing about customers; each lets whichever feature happens
+  to have the bigger numbers decide. Standardizing puts both features on
+  the same scale (SD units), so a 1-SD income gap and a 1-SD age gap
+  count equally and the answer no longer changes when someone re-enters
+  the spreadsheet in different units.
+\item
+  Any of: (i) features already in the \emph{same} meaningful units where
+  spread is information --- e.g.~the pixel intensities of an image, or
+  coordinates in meters, or the same measurement at 12 months:
+  standardizing would inflate a nearly-constant, mostly-noise feature to
+  equal importance with a genuinely varying one; (ii) one-hot/binary
+  indicator features, whose 0/1 scale is already comparable; (iii) when
+  the domain says one feature \emph{should} dominate. The rule:
+  standardize when the units are arbitrary and incomparable; don't when
+  the units are shared and the spread is the signal.
+\end{enumerate}
+
+\emph{Common mistake:} standardizing with the mean and SD of only the
+five rows in the table when the problem gives population values ---
+either is defensible only if you say which you used; here the given
+values are the ones to use.
+
+\end{solutionbox}
+
+
+
+
+\end{document}
