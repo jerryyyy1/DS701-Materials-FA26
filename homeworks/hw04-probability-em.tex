@@ -67,6 +67,7 @@
 
 
 \usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -165,8 +166,12 @@
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
 \hypersetup{
-  pdftitle={DS701 Homework 4: Probability, MLE, and EM},
+  pdftitle={DS701 Homework 4: Probability{,} MLE{,} and EM},
   colorlinks=true,
   linkcolor={blue},
   filecolor={Maroon},
